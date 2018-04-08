@@ -1,18 +1,52 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Zad2</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-	    <style>
-	      body{background-color: #66FF99; margin-left: 40%;}
-	    </style>
+    <style>
+      body{background-color: grey; margin-left: 40%;}
+    </style>
+  </head>
+  <body>
 
-	</head>
+    <br><h2>Enter some informations about you here</h2><br>
 
-	<body>
-		
-	</body>
-
+    <form action="/action_page.php">
+      <label>Mail: </label><br>
+      <input type="text" name="mail" />
+      <br>
+      
+      <br><button type="button">Wyślij</button>
+    </form>
+    <script type="text/javascript">
+      $("button").click(function (){
+        $('.warning').remove();
+        $('input').each(function () {
+          console.log($(this));
+          var dane ={name : $(this).attr('name'), value : $(this).val()};
+          $.ajaxSetup({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+          });
+          $.ajax({
+            method: "POST",
+            url: "check/" + $(this).attr('name') + "/",
+            dataType:"json",
+            data: {name : $(this).attr('name'), value : $(this).val()},
+            success: function(response) {
+              for(key in response){
+                if (response[key] == 1) {
+                }else {
+                  $("input[name='" + key + "']").after('<p class="warning">' + response[key] + '</p>');
+                }
+              }
+            },
+            error: function(msg){
+              console.log(msg);
+            }
+          });
+        });
+      });
+    </script>
+  </body>
 </html>
