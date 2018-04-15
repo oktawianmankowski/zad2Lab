@@ -12,7 +12,7 @@
 
     <br><h2>Enter some informations about you here</h2><br>
 
-    <form action="/action_page.php">
+    
 
 
 
@@ -23,12 +23,21 @@
       <input type="text" name="mail" value="mail@o2.pl"/><br>
 
       <br><label>Regon: </label><br>
-      <input type="text" name="Regon" /><br>     
+      <input type="text" name="Regon" value="470934052"/><br>     
+
+      <br><label>Pesel: </label><br>
+      <input type="text" name="pesel" value="84041015933"/><br>  
+
+      <br><label>NIP: </label><br>
+      <input type="text" name="nip" value="728-196-28-13"/><br>  
       
-      <br><button type="button">Wyślij</button>
-    </form>
+      <br><button type="button">Send</button>
+
+    
+
     <script type="text/javascript">
-      $("button").click(function (){
+
+        $("button").click(function (){
         $('.warning').remove();
         $('input').each(function () {
           console.log($(this));
